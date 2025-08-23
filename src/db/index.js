@@ -14,3 +14,7 @@ const connectDB = async () => {
 }
 
 export default connectDB;
+
+// remember whenever working with db
+// 1. potential errors may arise
+// 2. db is on another continent
