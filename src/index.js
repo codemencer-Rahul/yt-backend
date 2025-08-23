@@ -14,7 +14,7 @@ connectDB()
         throw error
     })
     app.listen(process.env.PORT, () => {
-        console.log(`App listening on port ${process.env.PORt}`)
+        console.log(`App listening on port ${process.env.PORT}`)
     })
 })
 .catch((error) => {

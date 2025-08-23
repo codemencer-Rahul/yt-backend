@@ -1,16 +1,18 @@
+// -- This code creates a wrapper function that helps handle errors in asynchronous route handlers --
+
 //  ---- Try Catch(1)
 /*
 const asyncHandler = (fn) => {
-    async (req, res, next) => {
-        try {
-            await fn(req, res, next)
-        } catch(err) {
-            res.status(err.code || 500).json({
-                success: false,
-                message: err.message
-            })
+    return async (req, res, next) => {
+            try {
+                await fn(req, res, next)
+            } catch(err) {
+                res.status(err.code || 500).json({
+                    success: false,
+                    message: err.message
+                })
+            }
         }
-    }
 }
 
 export { asyncHandler }
@@ -34,11 +36,12 @@ export { asyncHandler }
 */
 
 // ---- Promise
-const asyncHandler = (reqHandler) => {
+const asyncHandler = (reqHandler) => 
     (req,res,next) => {
-        Promise.resolve(reqHandler(req, res, next))
-        .reject((err) => next(err))
+        Promise
+        .resolve(reqHandler(req, res, next))
+        .catch((err) => next(err))
     }
-}
+
 
 export { asyncHandler }
